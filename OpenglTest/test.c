@@ -21,6 +21,8 @@ int main(int argc,char *argv[]){
 
 
 // 红色网格状茶壶
+// 编译命令  gcc -o test test.c -lGL -lGLU -lglut
+
 #include <GL/glut.h>
 
   void init(void)
