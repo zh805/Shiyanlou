@@ -26,12 +26,19 @@ void Star::drawStar(){
 
   int n = 1440;
 
-  glPushMatrix();
+  glPushMatrix();//保存OpenGL当前的工作环境
   {
+    // 公转
+
+    // 如果是行星，且距离不为0，那么 且向原点平移一个半径
+    // 这部分用于处理卫星
     if (parentStar != 0 && parentStar -> distance >0){
+      //将绘制的图形沿Z轴旋转alpha
       glRotatef(parentStar -> alpha,0,0,1);
+      //X轴方向上平移distance,y,z 方向不变
       glTranslatef(parentStar ->distance,0.0,0.0);
     }
+    //绘制运行轨道
     glBegin(GL_LINES);
     for(int i=0;i<n;++i)
       glVertex2f(distance * cos(2*PI*i/n),distance*sin(2*PI*i/n));
@@ -39,11 +46,11 @@ void Star::drawStar(){
     glRotatef(alpha,0,0,1);
     glTranslatef(distance,0.0,0.0);
     glRotatef(alphaSelf,0,0,1);
-
+    //绘制行星颜色
     glColor3f(rgbaColor[0],rgbaColor[1],rgbaColor[2]);
     glutSolidSphere(radius,40,32);
   }
-  glPopMatrix();
+  glPopMatrix();//恢复当前矩阵环境
 }
 
 void Star::update(long timeSpan){
@@ -59,7 +66,7 @@ Planet::Planet(GLfloat radius,GLfloat distance,GLfloat speed,
     rgbaColor[2] = rgbaColor [2];
     rgbaColor[3] = 1.0f;
   }
-
+//不发光的星球
 void Planet::drawPlanet(){
   GLfloat mat_ambient[] = {0.0f,0.0f,0.5f,1.0f};
   GLfloat mat_diffuse[] = {0.0f,0.0f,0.5f,1.0f};

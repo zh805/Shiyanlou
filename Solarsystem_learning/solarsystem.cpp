@@ -2,7 +2,7 @@
 #include <cstdlib>
 #define REST 700
 #define REST_Z (REST)
-#define REST_Y (-REST)
+#define REST_Y (-REST)//初始视角在（x,-x,x）处
 
 void SolarSystem::onDisplay(){
 
@@ -24,13 +24,12 @@ void SolarSystem::onDisplay(){
   glutSwapBuffers();
 }
 
-#define TIMEPAST 1
+#define TIMEPAST 1    //假设每次更新都经历了一天
 void SolarSystem::onUpdate(){
 
   for(int i=0;i<STARS_NUM;i++)
-    stars[i] ->update(TIMEPAST);
-
-  this ->onDisplay();
+    stars[i] ->update(TIMEPAST); //更新星球位置
+  this ->onDisplay();//刷新显示
 }
 
 #define OFFSET 20

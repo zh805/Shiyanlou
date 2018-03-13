@@ -1,5 +1,5 @@
-#ifndef star_hpp
-#define star_hpp
+#ifndef stars_hpp
+#define stars_hpp
 
 #ifdef __APPLE__
     #include <GLUT/glut.h>
